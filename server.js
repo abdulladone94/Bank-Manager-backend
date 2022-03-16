@@ -24,6 +24,16 @@ app.get("/persons", (req, res) => {
   });
 });
 
+app.get("/banks", (req, res) => {
+  db.query("SELECT * FROM bank", (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
 app.post("/newUser", (req, res) => {
   const firstName = req.body.firstName;
   const lastName = req.body.lastName;
