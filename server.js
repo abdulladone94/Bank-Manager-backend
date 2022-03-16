@@ -34,6 +34,19 @@ app.get("/banks", (req, res) => {
   });
 });
 
+app.get("/bankWiseAccounts", (req, res) => {
+  db.query(
+    "SELECT bankusers.userId, bank.bankName, person.firstName, person.lastName, person.address, person.dateOfBirth, person.gender, person.contactNo, person.nic FROM bankusers INNER JOIN bank ON bankusers.bankId = bank.bankId INNER JOIN person ON bankusers.personId = person.personId",
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
 app.post("/newUser", (req, res) => {
   const firstName = req.body.firstName;
   const lastName = req.body.lastName;
