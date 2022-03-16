@@ -14,6 +14,16 @@ const db = mysql.createConnection({
   database: "bank_manager",
 });
 
+app.get("/persons", (req, res) => {
+  db.query("SELECT * FROM person", (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
 app.post("/newUser", (req, res) => {
   const firstName = req.body.firstName;
   const lastName = req.body.lastName;
